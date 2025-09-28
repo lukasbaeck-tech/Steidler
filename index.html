@@ -9,38 +9,52 @@
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--bg)}
     .wrap{max-width:760px;margin:0 auto;padding:16px}
+
+    /* Header */
     header{background:#ffffff;color:var(--text);padding:18px 16px;border-bottom:1px solid #eee}
-    header .brand{display:flex;align-items:center;justify-content:center;gap:12px;font-weight:800;letter-spacing:.4px}
+    header .brand{display:flex;align-items:center;justify-content:center}
     .logoimg{height:140px;display:block;margin:0 auto}
+
     h1{font-size:28px;margin:10px 0 8px}
     h2{font-size:22px;margin:0 0 14px}
     p{line-height:1.45}
+
     .card{background:var(--card);border-radius:var(--radius);padding:18px 16px;box-shadow:0 1px 2px rgba(0,0,0,.04);position:relative}
     .notice{color:var(--muted);font-size:14px;margin-bottom:10px}
+
     .progress{height:8px;background:#e9eef2;border-radius:999px;margin:14px 0 18px;overflow:hidden}
     .progress>span{display:block;height:100%;width:0;background:var(--accent)}
-    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:14px 16px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer;position:relative;z-index:3;pointer-events:auto}
+
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:14px 16px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer;position:relative;z-index:3}
     .btn:disabled{opacity:.6;cursor:not-allowed}
     .btn.secondary{background:#e9eef2;color:#22303a}
     .btn.full{width:100%}
+
     .grid{display:grid;gap:12px}
     @media(min-width:600px){.grid.cols-2{grid-template-columns:1fr 1fr}}
-    .option{border-radius:14px;border:2px solid #e0e7ec;background:#fff;padding:14px 14px;font-weight:600;text-align:center;cursor:pointer}
-    .option[aria-checked="true"], .option.active{border-color:var(--accent);background:#fff7df}
+
+    .option{border-radius:14px;border:2px solid #e0e7ec;background:#fff;padding:14px;font-weight:600;text-align:center;cursor:pointer}
     .option:hover{border-color:#ced7de}
+    .option.active{border-color:var(--accent);background:#fff7df}
+
     .footer{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:24px 0;color:var(--muted);font-size:14px}
     .footer a{color:var(--muted);text-decoration:none}
+
     .field{display:grid;gap:6px;margin-bottom:12px}
     .input, select{width:100%;padding:14px 12px;border-radius:12px;border:2px solid #e0e7ec;background:#fff;font-size:16px}
     label{font-weight:600}
     .error{color:#b00020;font-size:14px;margin-top:6px;display:none}
+
     .hidden{display:none}
-    .claimbar{background:var(--brand);color:#fff;border-radius:10px;padding:18px 16px;margin:12px auto 0;text-align:center;position:static;pointer-events:none}
+
+    /* Banner unter Step 1 (keine Tap-Interception) */
+    .claimbar{background:var(--brand);color:#fff;border-radius:10px;padding:18px 16px;margin:12px auto 0;text-align:center;pointer-events:none}
     .claimbar .claimhead{font-weight:800;letter-spacing:.5px;font-size:22px}
     @media(min-width:600px){ .claimbar .claimhead{font-size:26px} }
     .claimbar .claimsub{margin-top:6px;font-size:14px;opacity:.95}
-    .step[data-step="1"]{position:relative}
-    #next1.btn{position:relative;z-index:10;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;margin-bottom:12px}
+
+    /* Android Tap-Reliability */
+    #next1{touch-action:manipulation;-webkit-tap-highlight-color:transparent;margin-bottom:12px}
   </style>
 </head>
 <body>
@@ -53,6 +67,7 @@
   </header>
 
   <main class="wrap">
+    <!-- Netlify Forms -->
     <form id="funnel" class="card" name="steidler-funnel" method="POST" netlify netlify-honeypot="bot-field" novalidate>
       <input type="hidden" name="form-name" value="steidler-funnel">
       <input type="text" name="bot-field" style="display:none">
@@ -66,7 +81,7 @@
         <h2>Wo befindet sich dein Haus?</h2>
         <div class="field">
           <label for="district">Bezirk auswählen</label>
-          <!-- no name => not submitted; we use the hidden "Bezirk" instead -->
+          <!-- kein name -> wird nicht direkt gesendet; wir senden das Hidden-Feld "Bezirk" -->
           <select id="district" required>
             <option value="" selected>Bitte auswählen</option>
             <option>Wiener Neustadt</option>
@@ -128,36 +143,37 @@
         </div>
       </section>
 
-      <!-- STEP 5: CONTACT -->
+      <!-- STEP 5: KONTAKT -->
       <section class="step hidden" data-step="5">
         <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung!</h2>
         <p>Wie können wir dich am besten erreichen?</p>
 
         <div class="field">
-          <label for="name">Kunden Name</label>
+          <label for="name">Dein Name</label>
+          <!-- Name-Attribut = Mail-Feldname -->
           <input id="name" name="Kunden Name" class="input" required placeholder="Max Mustermann" />
         </div>
 
         <div class="field">
-          <label for="email">E-Mail Adresse</label>
+          <label for="email">Deine E-Mail Adresse</label>
           <input id="email" name="E-Mail Adresse" type="email" class="input" required placeholder="name@beispiel.at" />
         </div>
 
         <div class="field">
-          <label for="phone">Telefonnummer</label>
+          <label for="phone">Deine Telefonnummer</label>
           <input id="phone" name="Telefonnummer" class="input" required placeholder="0664 123 45 67" />
         </div>
 
         <div class="field" style="align-items:start">
           <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400">
-            <!-- rename field to German & set friendly value -->
+            <!-- in der Mail heißt das Feld "Einwilligung" -->
             <input type="checkbox" id="consent" name="Einwilligung" value="Ja" required />
             <span>Ich akzeptiere die <a href="#" target="_blank">Datenschutzbestimmungen</a>.</span>
           </label>
           <div class="error" id="err5">Bitte stimme den Datenschutzbestimmungen zu.</div>
         </div>
 
-        <!-- Hidden fields for answers (German names => nice email output) -->
+        <!-- Versteckte Antworten mit schönen deutschen Namen -->
         <input type="hidden" name="Bezirk" id="answer_district" />
         <input type="hidden" name="Dachalter" id="answer_age" />
         <input type="hidden" name="Dachtyp" id="answer_type" />
@@ -167,7 +183,7 @@
         <div class="error" id="errSubmit">Bitte fülle alle Felder korrekt aus.</div>
       </section>
 
-      <!-- THANK YOU -->
+      <!-- DANKE -->
       <section class="step hidden" data-step="6">
         <h2>Vielen Dank! 🎉</h2>
         <p>Wir haben deine Angaben erhalten. Ein/e Expert:in meldet sich in Kürze, um deine Dachsanierung zu besprechen.</p>
@@ -183,44 +199,51 @@
   </main>
 
   <script>
-    const $ = (s, root=document) => root.querySelector(s);
-    const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
+    // Helpers
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
 
     const steps = $$(".step");
     let current = 1;
 
     function setProgress(){ const pct = Math.min((current-1)/5*100, 100); $('#bar').style.width = pct + '%'; }
     function go(step){ steps.forEach(sec => sec.classList.toggle('hidden', sec.dataset.step != step)); current = Number(step); setProgress(); }
+
+    // STEP 1
     function step1Advance(){
       const el = $('#district');
       if(!el.value){ $('#err1').style.display='block'; return; }
       $('#err1').style.display='none';
-      $('#answer_district').value = el.value; // fills hidden "Bezirk"
+      $('#answer_district').value = el.value; // Hidden-Feld "Bezirk"
       go(2);
     }
-
     const next1 = $('#next1');
-    ['click','touchend'].forEach(evt => {
-      next1.addEventListener(evt, () => {
-        if (next1._fired) return;
-        next1._fired = true;
-        setTimeout(()=> next1._fired = false, 250);
-        step1Advance();
-      }, {passive:true});
+    ['click','touchend'].forEach(evt=>{
+      next1.addEventListener(evt, ()=>{ if(next1._fired) return; next1._fired=true; setTimeout(()=>next1._fired=false,250); step1Advance(); }, {passive:true});
     });
 
-    $$('[data-back]').forEach(btn => btn.addEventListener('click', () => go(current-1)));
+    // Zurück-Buttons
+    $$('[data-back]').forEach(b => b.addEventListener('click', ()=> go(current-1)));
 
+    // STEP 2
     $$('.step[data-step="2"] .option').forEach(btn => btn.addEventListener('click', e => {
-      const v = e.currentTarget.dataset.value; $('#answer_age').value = v; go(3);
-    }));
-    $$('.step[data-step="3"] .option').forEach(btn => btn.addEventListener('click', e => {
-      const v = e.currentTarget.dataset.value; $('#answer_type').value = v; go(4);
-    }));
-    $$('.step[data-step="4"] .option').forEach(btn => btn.addEventListener('click', e => {
-      const v = e.currentTarget.dataset.value; $('#answer_timing').value = v; go(5);
+      $('#answer_age').value = e.currentTarget.dataset.value; // "Dachalter"
+      go(3);
     }));
 
+    // STEP 3
+    $$('.step[data-step="3"] .option').forEach(btn => btn.addEventListener('click', e => {
+      $('#answer_type').value = e.currentTarget.dataset.value; // "Dachtyp"
+      go(4);
+    }));
+
+    // STEP 4
+    $$('.step[data-step="4"] .option').forEach(btn => btn.addEventListener('click', e => {
+      $('#answer_timing').value = e.currentTarget.dataset.value; // "Sanierungszeitpunkt"
+      go(5);
+    }));
+
+    // Submit zu Netlify
     function encodeForm(obj){ return new URLSearchParams(Object.entries(obj)).toString(); }
 
     $('#submitBtn').addEventListener('click', async (e) => {
@@ -243,15 +266,16 @@
 
       try{
         await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+          method:'POST',
+          headers:{ 'Content-Type':'application/x-www-form-urlencoded', 'Accept':'application/json' },
           body: encodeForm(payload)
         });
-      }catch(e){}
+      }catch(e){ /* trotzdem Danke-Seite zeigen */ }
 
       go(6);
     });
 
+    // Init
     go(1);
   </script>
 </body>
