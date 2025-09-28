@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dachsanierung – Gratis-Entsorgung | Funnel</title>
+  <style>
+    :root{
+      --brand:#b02a20;           /* dunkles Blau/Grün */
+      --accent:#b02a20;          /* Gelb */
+      --accent-700:#8f1f17;
+      --text:#22303a;
+      --muted:#6b7a86;
+      --bg:#ffffff;
+      --card:#f8fafb;
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--bg)}
+    .wrap{max-width:760px;margin:0 auto;padding:16px}
+    header{background:#ffffff;color:var(--text);padding:18px 16px;border-bottom:1px solid #eee}
+    header .brand{display:flex;align-items:center;justify-content:center;gap:12px;font-weight:800;letter-spacing:.4px}
+    .logoimg{height:140px;display:block;margin:0 auto}
+    .claimbar{background:var(--brand);color:#fff;border-radius:10px;padding:18px 16px;margin:12px auto 0;text-align:center}
+    .claimbar .claimhead{font-weight:800;letter-spacing:.5px;font-size:22px}
+    @media(min-width:600px){ .claimbar .claimhead{font-size:26px} }
+    .claimbar .claimsub{margin-top:6px;font-size:14px;opacity:.95}
+    header .brand .logo{width:32px;height:32px;border-radius:6px;background:var(--accent)}
+
+    h1{font-size:28px;margin:10px 0 8px}
+    h2{font-size:22px;margin:0 0 14px}
+    p{line-height:1.45}
+
+    .card{background:var(--card);border-radius:var(--radius);padding:18px 16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+
+    .notice{color:var(--muted);font-size:14px;margin-bottom:10px}
+
+    .progress{height:8px;background:#e9eef2;border-radius:999px;margin:14px 0 18px;overflow:hidden}
+    .progress>span{display:block;height:100%;width:0;background:var(--accent)}
+
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:14px 16px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+    .btn.secondary{background:#e9eef2;color:#22303a}
+    .btn.full{width:100%}
+
+    .grid{display:grid;gap:12px}
+    @media(min-width:600px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+
+    .option{border-radius:14px;border:2px solid #e0e7ec;background:#fff;padding:14px 14px;font-weight:600;text-align:center;cursor:pointer}
+    .option[aria-checked="true"], .option.active{border-color:var(--accent);background:#fff7df}
+    .option:hover{border-color:#ced7de}
+
+    .footer{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:24px 0;color:var(--muted);font-size:14px}
+    .footer a{color:var(--muted);text-decoration:none}
+
+    .field{display:grid;gap:6px;margin-bottom:12px}
+    .input, select{width:100%;padding:14px 12px;border-radius:12px;border:2px solid #e0e7ec;background:#fff;font-size:16px}
+    label{font-weight:600}
+    .error{color:#b00020;font-size:14px;margin-top:6px;display:none}
+
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <img class="logoimg" src="https://steidler.at/wordpress/wp-content/uploads/2016/12/logo_steidler.png" alt="Steidler – Dachdeckungen · Zimmerei · Spenglerei (Seit 1926)" />
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <form id="funnel" class="card" novalidate>
+      <div class="notice">Nur für Wiener Neustadt & Neunkirchen! </div>
+      <h1>Lass jetzt deinen <b>Dachschaden</b> untersuchen!</h1>
+      <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+
+      <!-- STEP 1 -->
+      <section class="step" data-step="1">
+        <h2>Wo befindet sich dein Haus?</h2>
+        <div class="field">
+          <label for="district">Bezirk auswählen</label>
+          <select id="district" name="district" required>
+            <option value="" selected>Bitte auswählen</option>
+            <option>Wiener Neustadt</option>
+            <option>Wiener Neustadt-Land</option>
+            <option>Neunkirchen</option>
+          </select>
+          <div class="error" id="err1">Bitte wähle deinen Bezirk.</div>
+        </div>
+        <button type="button" class="btn full" id="next1">Jetzt profitieren – Weiter zur nächsten Frage!</button>
+        <div class="claimbar">
+          <div class="claimhead">ALLES AUS EINER HAND</div>
+          <div class="claimsub">Dachdecker, Spengler, Zimmermann – professionell und koordiniert</div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step hidden" data-step="2">
+        <div class="notice">Frage 2 von 4 </div>
+        <h2>Wie alt ist dein Dach?</h2>
+        <div class="grid">
+          <button type="button" class="option" data-value="älter als 1950">älter als 1950</button>
+          <button type="button" class="option" data-value="1950–1970">1950–1970</button>
+          <button type="button" class="option" data-value="1970–1990">1970–1990</button>
+          <button type="button" class="option" data-value="jünger als 1990">jünger als 1990</button>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <button type="button" class="btn secondary" data-back>Zurück</button>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step hidden" data-step="3">
+        <div class="notice">Frage 3 von 4 </div>
+        <h2>Um welches Dach handelt es sich?</h2>
+        <div class="grid cols-2">
+          <button type="button" class="option" data-value="Satteldach">Satteldach</button>
+          <button type="button" class="option" data-value="Flachdach">Flachdach</button>
+          <button type="button" class="option" data-value="Pultdach">Pultdach</button>
+          <button type="button" class="option" data-value="Walmdach">Walmdach</button>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <button type="button" class="btn secondary" data-back>Zurück</button>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step hidden" data-step="4">
+        <div class="notice">Frage 4 von 4 </div>
+        <h2>Wann möchtest du die Dachsanierung umsetzen?</h2>
+        <div class="grid">
+          <button type="button" class="option" data-value="2025">2025</button>
+          <button type="button" class="option" data-value="2026">2026</button>
+          <button type="button" class="option" data-value="nach 2026">nach 2026</button>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <button type="button" class="btn secondary" data-back>Zurück</button>
+        </div>
+      </section>
+
+      <!-- STEP 5: CONTACT -->
+      <section class="step hidden" data-step="5">
+        <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung und einer stressfreien Sanierung.</h2>
+        <p>Wie können wir dich am besten erreichen?</p>
+        <div class="field">
+          <label for="name">Dein Name</label>
+          <input id="name" name="name" class="input" required placeholder="Max Mustermann" />
+        </div>
+        <div class="field">
+          <label for="email">Deine E‑Mail Adresse</label>
+          <input id="email" name="email" type="email" class="input" required placeholder="name@beispiel.at" />
+        </div>
+        <div class="field">
+          <label for="phone">Deine Telefonnummer</label>
+          <input id="phone" name="phone" class="input" required placeholder="0664 123 45 67" />
+        </div>
+        <div class="field" style="align-items:start">
+          <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400">
+            <input type="checkbox" id="consent" required />
+            <span>Ich akzeptiere die <a href="#" target="_blank">Datenschutzbestimmungen</a>.</span>
+          </label>
+          <div class="error" id="err5">Bitte stimme den Datenschutzbestimmungen zu.</div>
+        </div>
+
+        <!-- Hidden fields for answers & tracking -->
+        <input type="hidden" name="utm_source" id="utm_source" />
+        <input type="hidden" name="utm_medium" id="utm_medium" />
+        <input type="hidden" name="utm_campaign" id="utm_campaign" />
+        <input type="hidden" name="fbclid" id="fbclid" />
+        <input type="hidden" name="ad_id" id="ad_id" />
+
+        <input type="hidden" name="answer_district" id="answer_district" />
+        <input type="hidden" name="answer_age" id="answer_age" />
+        <input type="hidden" name="answer_type" id="answer_type" />
+        <input type="hidden" name="answer_timing" id="answer_timing" />
+
+        <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Dachentsorgung sichern!</button>
+        <div class="error" id="errSubmit">Bitte fülle alle Felder korrekt aus.</div>
+      </section>
+
+      <!-- THANK YOU -->
+      <section class="step hidden" data-step="6">
+        <h2>Vielen Dank! 🎉</h2>
+        <p>Wir haben deine Angaben erhalten. Ein/e Expert:in meldet sich in Kürze, um deine Dachsanierung zu besprechen.</p>
+        <p style="margin-top:8px"><a class="btn" href="#" onclick="window.location.href='tel:+431234567'">Jetzt gleich anrufen</a></p>
+      </section>
+
+    </form>
+
+    <div class="footer">
+      <a href="#">Impressum</a> ·
+      <a href="#">Datenschutzerklärung</a> ·
+      <a href="#">Cookies verwalten</a>
+    </div>
+  </main>
+
+  <script>
+    // --- helpers
+    const $ = (s, root=document) => root.querySelector(s);
+    const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
+
+    const steps = $$(".step");
+    let current = 1;
+
+    const answers = {};
+
+    function setProgress(){
+      const pct = Math.min((current-1) / 5 * 100, 100);
+      $('#bar').style.width = pct + '%';
+    }
+
+    function go(step){
+      steps.forEach(sec => sec.classList.toggle('hidden', sec.dataset.step != step));
+      current = Number(step);
+      setProgress();
+      track('FunnelStep', {step: step});
+    }
+
+    function track(event, data){
+      if(window.fbq){ try{ fbq('trackCustom', event, data || {}); }catch(e){} }
+    }
+
+    // Step 1
+    $('#next1').addEventListener('click', () => {
+      const el = $('#district');
+      if(!el.value){ $('#err1').style.display='block'; return; }
+      $('#err1').style.display='none';
+      answers.district = el.value;
+      $('#answer_district').value = el.value;
+      go(2);
+    });
+
+    // Back buttons
+    $$('[data-back]').forEach(btn => btn.addEventListener('click', () => go(current-1)));
+
+    // Step 2 buttons
+    $$('.step[data-step="2"] .option').forEach(btn => btn.addEventListener('click', e => {
+      const v = e.currentTarget.dataset.value; answers.age=v; $('#answer_age').value=v; go(3);
+    }));
+
+    // Step 3 buttons
+    $$('.step[data-step="3"] .option').forEach(btn => btn.addEventListener('click', e => {
+      const v = e.currentTarget.dataset.value; answers.type=v; $('#answer_type').value=v; go(4);
+    }));
+
+    // Step 4 buttons
+    $$('.step[data-step="4"] .option').forEach(btn => btn.addEventListener('click', e => {
+      const v = e.currentTarget.dataset.value; answers.timing=v; $('#answer_timing').value=v; go(5);
+    }));
+
+    // UTM capture
+    (function captureParams(){
+      const params = new URLSearchParams(location.search);
+      ['utm_source','utm_medium','utm_campaign','fbclid','ad_id'].forEach(k => {
+        const val = params.get(k) || '';
+        const el = document.getElementById(k);
+        if(el) el.value = val;
+      });
+    })();
+
+    // Submit
+    $('#submitBtn').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const valid = $('#name').value && $('#email').value && $('#phone').value && $('#consent').checked;
+      if(!valid){ $('#errSubmit').style.display='block'; return; }
+      $('#errSubmit').style.display='none';
+
+      // Build payload
+      const payload = {
+        name: $('#name').value,
+        email: $('#email').value,
+        phone: $('#phone').value,
+        consent: $('#consent').checked,
+        ...answers,
+        utm:{
+          utm_source: $('#utm_source').value,
+          utm_medium: $('#utm_medium').value,
+          utm_campaign: $('#utm_campaign').value,
+          fbclid: $('#fbclid').value,
+          ad_id: $('#ad_id').value,
+        }
+      };
+
+      // TODO: Replace with your endpoint (Formspree, Zapier, Perspective webhook, Make, etc.)
+      const ENDPOINT = 'https://example.com/webhook';
+
+      try{
+        await fetch(ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+      }catch(err){ /* swallow; still show thank-you */ }
+
+      track('Lead', payload);
+      go(6);
+    });
+
+    // init
+    go(1);
+  <\/script>
+  
+</body>
+</html>
