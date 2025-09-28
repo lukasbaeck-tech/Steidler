@@ -127,7 +127,7 @@
 
       <!-- STEP 2 -->
       <section class="step hidden" data-step="2">
-        <div class="notice">Frage 2 von 4 </div>
+        <div class="notice">Frage 2 von 4</div>
         <h2>Wie alt ist dein Dach?</h2>
         <div class="grid">
           <button type="button" class="option" data-value="älter als 1950">älter als 1950</button>
@@ -142,7 +142,7 @@
 
       <!-- STEP 3 -->
       <section class="step hidden" data-step="3">
-        <div class="notice">Frage 3 von 4 </div>
+        <div class="notice">Frage 3 von 4</div>
         <h2>Um welches Dach handelt es sich?</h2>
         <div class="grid cols-2">
           <button type="button" class="option" data-value="Satteldach">Satteldach</button>
@@ -157,7 +157,7 @@
 
       <!-- STEP 4 -->
       <section class="step hidden" data-step="4">
-        <div class="notice">Frage 4 von 4 </div>
+        <div class="notice">Frage 4 von 4</div>
         <h2>Wann möchtest du die Dachsanierung umsetzen?</h2>
         <div class="grid">
           <button type="button" class="option" data-value="2025">2025</button>
@@ -193,17 +193,11 @@
           <div class="error" id="err5">Bitte stimme den Datenschutzbestimmungen zu.</div>
         </div>
 
-        <!-- Hidden fields for answers & tracking -->
-        <input type="hidden" name="utm_source" id="utm_source" />
-        <input type="hidden" name="utm_medium" id="utm_medium" />
-        <input type="hidden" name="utm_campaign" id="utm_campaign" />
-        <input type="hidden" name="fbclid" id="fbclid" />
-        <input type="hidden" name="ad_id" id="ad_id" />
-
-        <input type="hidden" name="answer_district" id="answer_district" />
-        <input type="hidden" name="answer_age" id="answer_age" />
-        <input type="hidden" name="answer_type" id="answer_type" />
-        <input type="hidden" name="answer_timing" id="answer_timing" />
+        <!-- Hidden fields for answers (renamed for nicer emails) -->
+        <input type="hidden" name="Bezirk" id="answer_district" />
+        <input type="hidden" name="Dachalter" id="answer_age" />
+        <input type="hidden" name="Dachtyp" id="answer_type" />
+        <input type="hidden" name="Sanierungszeitpunkt" id="answer_timing" />
 
         <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Beratung sichern!</button>
         <div class="error" id="errSubmit">Bitte fülle alle Felder korrekt aus.</div>
@@ -211,7 +205,7 @@
 
       <!-- THANK YOU -->
       <section class="step hidden" data-step="6">
-        <h2>Vielen Dank! 🎉</h2>
+        <h2>Vielen Dank!</h2>
         <p>Wir haben deine Angaben erhalten. Ein/e Expert:in meldet sich in Kürze, um deine Dachsanierung zu besprechen.</p>
         <p style="margin-top:8px"><a class="btn" href="#" onclick="window.location.href='tel:+431234567'">Jetzt gleich anrufen</a></p>
       </section>
@@ -253,7 +247,7 @@
       if(!el.value){ $('#err1').style.display='block'; return; }
       $('#err1').style.display='none';
       answers.district = el.value;
-      $('#answer_district').value = el.value;
+      $('#answer_district').value = el.value;  // fills hidden "Bezirk"
       go(2);
     }
     const next1 = $('#next1');
@@ -271,30 +265,29 @@
 
     // Step 2 buttons
     $$('.step[data-step="2"] .option').forEach(btn => btn.addEventListener('click', e => {
-      const v = e.currentTarget.dataset.value; answers.age=v; $('#answer_age').value=v; go(3);
+      const v = e.currentTarget.dataset.value;
+      answers.age = v;
+      $('#answer_age').value = v; // fills hidden "Dachalter"
+      go(3);
     }));
 
     // Step 3 buttons
     $$('.step[data-step="3"] .option').forEach(btn => btn.addEventListener('click', e => {
-      const v = e.currentTarget.dataset.value; answers.type=v; $('#answer_type').value=v; go(4);
+      const v = e.currentTarget.dataset.value;
+      answers.type = v;
+      $('#answer_type').value = v; // fills hidden "Dachtyp"
+      go(4);
     }));
 
     // Step 4 buttons
     $$('.step[data-step="4"] .option').forEach(btn => btn.addEventListener('click', e => {
-      const v = e.currentTarget.dataset.value; answers.timing=v; $('#answer_timing').value=v; go(5);
+      const v = e.currentTarget.dataset.value;
+      answers.timing = v;
+      $('#answer_timing').value = v; // fills hidden "Sanierungszeitpunkt"
+      go(5);
     }));
 
-    // UTM capture
-    (function captureParams(){
-      const params = new URLSearchParams(location.search);
-      ['utm_source','utm_medium','utm_campaign','fbclid','ad_id'].forEach(k => {
-        const val = params.get(k) || '';
-        const el = document.getElementById(k);
-        if(el) el.value = val;
-      });
-    })();
-
-    // Netlify Forms submit (email you via Netlify)
+    // Netlify Forms submit (posts to current origin)
     function encodeForm(obj){
       return new URLSearchParams(Object.entries(obj)).toString();
     }
@@ -312,10 +305,10 @@
         email:  $('#email').value,
         phone:  $('#phone').value,
         consent: $('#consent').checked ? 'yes' : 'no',
-        district: $('#answer_district').value,
-        age:      $('#answer_age').value,
-        type:     $('#answer_type').value,
-        timing:   $('#answer_timing').value,
+        Bezirk: $('#answer_district').value,
+        Dachalter: $('#answer_age').value,
+        Dachtyp: $('#answer_type').value,
+        Sanierungszeitpunkt: $('#answer_timing').value,
         message: `Neuer Lead:
 - Name: ${$('#name').value}
 - E-Mail: ${$('#email').value}
@@ -323,7 +316,7 @@
 - Bezirk: ${$('#answer_district').value}
 - Dachalter: ${$('#answer_age').value}
 - Dachtyp: ${$('#answer_type').value}
-- Zeitpunkt: ${$('#answer_timing').value}`
+- Sanierungszeitpunkt: ${$('#answer_timing').value}`
       };
 
       try{
@@ -332,7 +325,7 @@
           headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
           body: encodeForm(payload)
         });
-      }catch(e){ /* ignore network errors; still show thank-you */ }
+      }catch(e){ /* ignore; still show thank-you */ }
 
       track('Lead', payload);
       go(6);
