@@ -57,14 +57,24 @@
 
     .hidden{display:none}
 
-    /* Red banner below the first step (non-interactive so it can't block taps) */
-    .claimbar{background:var(--brand);color:#fff;border-radius:10px;padding:18px 16px;margin:12px auto 0;text-align:center;position:relative;z-index:1;pointer-events:none}
+    /* Banner below step 1 (must not intercept taps) */
+    .claimbar{background:var(--brand);color:#fff;border-radius:10px;padding:18px 16px;margin:12px auto 0;text-align:center;position:static;pointer-events:none}
     .claimbar .claimhead{font-weight:800;letter-spacing:.5px;font-size:22px}
     @media(min-width:600px){ .claimbar .claimhead{font-size:26px} }
     .claimbar .claimsub{margin-top:6px;font-size:14px;opacity:.95}
 
     /* Ensure step area is a stacking context */
     .step[data-step="1"]{position:relative}
+
+    /* Android tap reliability for the main CTA */
+    #next1.btn{
+      position:relative;
+      z-index:10;
+      pointer-events:auto;
+      touch-action:manipulation;
+      -webkit-tap-highlight-color:transparent;
+      margin-bottom:12px;
+    }
   </style>
 </head>
 <body>
@@ -77,9 +87,20 @@
   </header>
 
   <main class="wrap">
-    <form id="funnel" class="card" novalidate>
+    <!-- Netlify Forms enabled -->
+    <form id="funnel"
+          class="card"
+          name="steidler-funnel"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          novalidate>
+      <!-- Netlify requires these hidden inputs -->
+      <input type="hidden" name="form-name" value="steidler-funnel">
+      <input type="text" name="bot-field" style="display:none">
+
       <div class="notice">Nur für Wiener Neustadt & Neunkirchen! </div>
-      <h1>Lass deinen Dachschaden untersuchen!</h1>
+      <h1>Lass deinen <b>Dachschaden</b> – untersuchen!</h1>
       <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
       <!-- STEP 1 -->
@@ -106,7 +127,7 @@
 
       <!-- STEP 2 -->
       <section class="step hidden" data-step="2">
-        <div class="notice">Frage 2 von 4 </div>
+        <div class="notice">Frage 2 von 4 💪</div>
         <h2>Wie alt ist dein Dach?</h2>
         <div class="grid">
           <button type="button" class="option" data-value="älter als 1950">älter als 1950</button>
@@ -121,7 +142,7 @@
 
       <!-- STEP 3 -->
       <section class="step hidden" data-step="3">
-        <div class="notice">Frage 3 von 4 </div>
+        <div class="notice">Frage 3 von 4 ✨</div>
         <h2>Um welches Dach handelt es sich?</h2>
         <div class="grid cols-2">
           <button type="button" class="option" data-value="Satteldach">Satteldach</button>
@@ -136,7 +157,7 @@
 
       <!-- STEP 4 -->
       <section class="step hidden" data-step="4">
-        <div class="notice">Frage 4 von 4 </div>
+        <div class="notice">Frage 4 von 4 ✨</div>
         <h2>Wann möchtest du die Dachsanierung umsetzen?</h2>
         <div class="grid">
           <button type="button" class="option" data-value="2025">2025</button>
@@ -150,7 +171,7 @@
 
       <!-- STEP 5: CONTACT -->
       <section class="step hidden" data-step="5">
-        <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung entfernt.</h2>
+        <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung!.</h2>
         <p>Wie können wir dich am besten erreichen?</p>
         <div class="field">
           <label for="name">Dein Name</label>
@@ -166,7 +187,7 @@
         </div>
         <div class="field" style="align-items:start">
           <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400">
-            <input type="checkbox" id="consent" required />
+            <input type="checkbox" id="consent" name="consent" value="yes" required />
             <span>Ich akzeptiere die <a href="#" target="_blank">Datenschutzbestimmungen</a>.</span>
           </label>
           <div class="error" id="err5">Bitte stimme den Datenschutzbestimmungen zu.</div>
@@ -184,7 +205,7 @@
         <input type="hidden" name="answer_type" id="answer_type" />
         <input type="hidden" name="answer_timing" id="answer_timing" />
 
-        <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Beratung sichern!</button>
+        <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Bearatung sichern!</button>
         <div class="error" id="errSubmit">Bitte fülle alle Felder korrekt aus.</div>
       </section>
 
@@ -226,14 +247,23 @@
       if(window.fbq){ try{ fbq('trackCustom', event, data || {}); }catch(e){} }
     }
 
-    // Step 1
-    $('#next1').addEventListener('click', () => {
+    // Step 1 (Android-safe)
+    function step1Advance(){
       const el = $('#district');
       if(!el.value){ $('#err1').style.display='block'; return; }
       $('#err1').style.display='none';
       answers.district = el.value;
       $('#answer_district').value = el.value;
       go(2);
+    }
+    const next1 = $('#next1');
+    ['click','touchend'].forEach(evt => {
+      next1.addEventListener(evt, () => {
+        if (next1._fired) return;
+        next1._fired = true;
+        setTimeout(()=> next1._fired = false, 250);
+        step1Advance();
+      }, {passive:true});
     });
 
     // Back buttons
@@ -264,33 +294,46 @@
       });
     })();
 
-    // Submit
+    // Netlify Forms submit (email you via Netlify)
+    function encodeForm(obj){
+      return new URLSearchParams(Object.entries(obj)).toString();
+    }
+
     $('#submitBtn').addEventListener('click', async (e) => {
       e.preventDefault();
+
       const valid = $('#name').value && $('#email').value && $('#phone').value && $('#consent').checked;
       if(!valid){ $('#errSubmit').style.display='block'; return; }
       $('#errSubmit').style.display='none';
 
       const payload = {
-        name: $('#name').value,
-        email: $('#email').value,
-        phone: $('#phone').value,
-        consent: $('#consent').checked,
-        ...answers,
-        utm:{
-          utm_source: $('#utm_source').value,
-          utm_medium: $('#utm_medium').value,
-          utm_campaign: $('#utm_campaign').value,
-          fbclid: $('#fbclid').value,
-          ad_id: $('#ad_id').value,
-        }
+        'form-name': 'steidler-funnel',
+        name:   $('#name').value,
+        email:  $('#email').value,
+        phone:  $('#phone').value,
+        consent: $('#consent').checked ? 'yes' : 'no',
+        district: $('#answer_district').value,
+        age:      $('#answer_age').value,
+        type:     $('#answer_type').value,
+        timing:   $('#answer_timing').value,
+        // optional combined text for the notification email
+        message: `Neuer Lead:
+- Name: ${$('#name').value}
+- E-Mail: ${$('#email').value}
+- Telefon: ${$('#phone').value}
+- Bezirk: ${$('#answer_district').value}
+- Dachalter: ${$('#answer_age').value}
+- Dachtyp: ${$('#answer_type').value}
+- Zeitpunkt: ${$('#answer_timing').value}`
       };
 
-      // Replace with your endpoint
-      const ENDPOINT = 'https://example.com/webhook';
       try{
-        await fetch(ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
-      }catch(err){ /* ignore; still show thank-you */ }
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+          body: encodeForm(payload)
+        });
+      }catch(e){ /* ignore network errors; still show thank-you */ }
 
       track('Lead', payload);
       go(6);
