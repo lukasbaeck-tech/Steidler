@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dachsanierung – Gratis-Entsorgung | Funnel</title>
+  <title>Steidler Dachsanierung | Funnel</title>
   <style>
     :root{
-      --brand:#b02a20;           /* dunkles Blau/Grün */
-      --accent:#b02a20;          /* Gelb */
+      --brand:#b02a20;
+      --accent:#b02a20;
       --accent-700:#8f1f17;
       --text:#22303a;
       --muted:#6b7a86;
@@ -18,27 +18,24 @@
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--bg)}
     .wrap{max-width:760px;margin:0 auto;padding:16px}
+
+    /* Header: white bg, centered big logo */
     header{background:#ffffff;color:var(--text);padding:18px 16px;border-bottom:1px solid #eee}
     header .brand{display:flex;align-items:center;justify-content:center;gap:12px;font-weight:800;letter-spacing:.4px}
     .logoimg{height:140px;display:block;margin:0 auto}
-    .claimbar{background:var(--brand);color:#fff;border-radius:10px;padding:18px 16px;margin:12px auto 0;text-align:center}
-    .claimbar .claimhead{font-weight:800;letter-spacing:.5px;font-size:22px}
-    @media(min-width:600px){ .claimbar .claimhead{font-size:26px} }
-    .claimbar .claimsub{margin-top:6px;font-size:14px;opacity:.95}
-    header .brand .logo{width:32px;height:32px;border-radius:6px;background:var(--accent)}
 
     h1{font-size:28px;margin:10px 0 8px}
     h2{font-size:22px;margin:0 0 14px}
     p{line-height:1.45}
 
-    .card{background:var(--card);border-radius:var(--radius);padding:18px 16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    .card{background:var(--card);border-radius:var(--radius);padding:18px 16px;box-shadow:0 1px 2px rgba(0,0,0,.04);position:relative}
 
     .notice{color:var(--muted);font-size:14px;margin-bottom:10px}
 
     .progress{height:8px;background:#e9eef2;border-radius:999px;margin:14px 0 18px;overflow:hidden}
     .progress>span{display:block;height:100%;width:0;background:var(--accent)}
 
-    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:14px 16px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:14px 16px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:16px;cursor:pointer;position:relative;z-index:3;pointer-events:auto}
     .btn:disabled{opacity:.6;cursor:not-allowed}
     .btn.secondary{background:#e9eef2;color:#22303a}
     .btn.full{width:100%}
@@ -59,6 +56,15 @@
     .error{color:#b00020;font-size:14px;margin-top:6px;display:none}
 
     .hidden{display:none}
+
+    /* Red banner below the first step (non-interactive so it can't block taps) */
+    .claimbar{background:var(--brand);color:#fff;border-radius:10px;padding:18px 16px;margin:12px auto 0;text-align:center;position:relative;z-index:1;pointer-events:none}
+    .claimbar .claimhead{font-weight:800;letter-spacing:.5px;font-size:22px}
+    @media(min-width:600px){ .claimbar .claimhead{font-size:26px} }
+    .claimbar .claimsub{margin-top:6px;font-size:14px;opacity:.95}
+
+    /* Ensure step area is a stacking context */
+    .step[data-step="1"]{position:relative}
   </style>
 </head>
 <body>
@@ -71,10 +77,9 @@
   </header>
 
   <main class="wrap">
-
     <form id="funnel" class="card" novalidate>
       <div class="notice">Nur für Wiener Neustadt & Neunkirchen! </div>
-      <h1>Lass jetzt deinen <b>Dachschaden</b> untersuchen!</h1>
+      <h1>Lass deinen Dachschaden untersuchen!</h1>
       <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
       <!-- STEP 1 -->
@@ -90,7 +95,9 @@
           </select>
           <div class="error" id="err1">Bitte wähle deinen Bezirk.</div>
         </div>
+
         <button type="button" class="btn full" id="next1">Jetzt profitieren – Weiter zur nächsten Frage!</button>
+
         <div class="claimbar">
           <div class="claimhead">ALLES AUS EINER HAND</div>
           <div class="claimsub">Dachdecker, Spengler, Zimmermann – professionell und koordiniert</div>
@@ -143,14 +150,14 @@
 
       <!-- STEP 5: CONTACT -->
       <section class="step hidden" data-step="5">
-        <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung und einer stressfreien Sanierung.</h2>
+        <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung entfernt.</h2>
         <p>Wie können wir dich am besten erreichen?</p>
         <div class="field">
           <label for="name">Dein Name</label>
           <input id="name" name="name" class="input" required placeholder="Max Mustermann" />
         </div>
         <div class="field">
-          <label for="email">Deine E‑Mail Adresse</label>
+          <label for="email">Deine E-Mail Adresse</label>
           <input id="email" name="email" type="email" class="input" required placeholder="name@beispiel.at" />
         </div>
         <div class="field">
@@ -177,7 +184,7 @@
         <input type="hidden" name="answer_type" id="answer_type" />
         <input type="hidden" name="answer_timing" id="answer_timing" />
 
-        <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Dachentsorgung sichern!</button>
+        <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Beratung sichern!</button>
         <div class="error" id="errSubmit">Bitte fülle alle Felder korrekt aus.</div>
       </section>
 
@@ -187,7 +194,6 @@
         <p>Wir haben deine Angaben erhalten. Ein/e Expert:in meldet sich in Kürze, um deine Dachsanierung zu besprechen.</p>
         <p style="margin-top:8px"><a class="btn" href="#" onclick="window.location.href='tel:+431234567'">Jetzt gleich anrufen</a></p>
       </section>
-
     </form>
 
     <div class="footer">
@@ -198,27 +204,24 @@
   </main>
 
   <script>
-    // --- helpers
+    // helpers
     const $ = (s, root=document) => root.querySelector(s);
     const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
 
     const steps = $$(".step");
     let current = 1;
-
     const answers = {};
 
     function setProgress(){
       const pct = Math.min((current-1) / 5 * 100, 100);
       $('#bar').style.width = pct + '%';
     }
-
     function go(step){
       steps.forEach(sec => sec.classList.toggle('hidden', sec.dataset.step != step));
       current = Number(step);
       setProgress();
       track('FunnelStep', {step: step});
     }
-
     function track(event, data){
       if(window.fbq){ try{ fbq('trackCustom', event, data || {}); }catch(e){} }
     }
@@ -268,7 +271,6 @@
       if(!valid){ $('#errSubmit').style.display='block'; return; }
       $('#errSubmit').style.display='none';
 
-      // Build payload
       const payload = {
         name: $('#name').value,
         email: $('#email').value,
@@ -284,12 +286,11 @@
         }
       };
 
-      // TODO: Replace with your endpoint (Formspree, Zapier, Perspective webhook, Make, etc.)
+      // Replace with your endpoint
       const ENDPOINT = 'https://example.com/webhook';
-
       try{
         await fetch(ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
-      }catch(err){ /* swallow; still show thank-you */ }
+      }catch(err){ /* ignore; still show thank-you */ }
 
       track('Lead', payload);
       go(6);
@@ -297,7 +298,6 @@
 
     // init
     go(1);
-  <\/script>
-  
+  </script>
 </body>
 </html>
