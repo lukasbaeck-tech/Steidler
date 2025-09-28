@@ -92,14 +92,14 @@
           class="card"
           name="steidler-funnel"
           method="POST"
-          data-netlify="true"
+          netlify
           netlify-honeypot="bot-field"
           novalidate>
       <!-- Netlify requires these hidden inputs -->
       <input type="hidden" name="form-name" value="steidler-funnel">
       <input type="text" name="bot-field" style="display:none">
 
-      <div class="notice">Nur für Wiener Neustadt & Neunkirchen! </div>
+      <div class="notice">Nur für Wiener Neustadt & Neunkirchen!</div>
       <h1>Lass deinen <b>Dachschaden</b> – untersuchen!</h1>
       <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
@@ -171,7 +171,7 @@
 
       <!-- STEP 5: CONTACT -->
       <section class="step hidden" data-step="5">
-        <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung!.</h2>
+        <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung!</h2>
         <p>Wie können wir dich am besten erreichen?</p>
         <div class="field">
           <label for="name">Dein Name</label>
@@ -205,7 +205,7 @@
         <input type="hidden" name="answer_type" id="answer_type" />
         <input type="hidden" name="answer_timing" id="answer_timing" />
 
-        <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Bearatung sichern!</button>
+        <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Beratung sichern!</button>
         <div class="error" id="errSubmit">Bitte fülle alle Felder korrekt aus.</div>
       </section>
 
@@ -316,7 +316,6 @@
         age:      $('#answer_age').value,
         type:     $('#answer_type').value,
         timing:   $('#answer_timing').value,
-        // optional combined text for the notification email
         message: `Neuer Lead:
 - Name: ${$('#name').value}
 - E-Mail: ${$('#email').value}
