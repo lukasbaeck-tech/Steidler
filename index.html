@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Steidler Dachsanierung | Funnel</title>
 
-  <!-- Fonts: Oswald (modern, caps headings) -->
+  <!-- Font: Oswald -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome for service icons -->
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* ===== Design Tokens ===== */
     :root{
       --brand:#b02a20;
       --brand-700:#8f1f17;
@@ -27,7 +26,6 @@
       --radius:18px;
       --shadow:0 6px 18px rgba(0,0,0,.06);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -37,14 +35,20 @@
       background:var(--bg);
       -webkit-font-smoothing:antialiased;
     }
-
     .wrap{max-width:820px;margin:0 auto;padding:20px}
 
-    header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+    /* Header scrollt normal mit */
+    header{background:#fff;border-bottom:1px solid var(--border);position:relative;z-index:1}
     header .brand{display:flex;align-items:center;justify-content:center;padding:16px 20px;position:relative}
     .logoimg{height:132px;display:block;margin:0 auto}
-    .discount-badge{position:absolute;top:10px;right:10px;width:120px;z-index:20;pointer-events:none}
-    .discount-badge img{display:block;width:100%;height:auto}
+
+    /* Rabatt-Badge als Kreis (schneidet weißes Rechteck ab) */
+    .discount-badge{
+      position:absolute;top:10px;right:10px;width:120px;z-index:20;
+      pointer-events:none;aspect-ratio:1/1;border-radius:50%;overflow:hidden;
+      background:transparent;box-shadow:0 6px 16px rgba(0,0,0,.18)
+    }
+    .discount-badge img{display:block;width:100%;height:100%;object-fit:cover}
     @media (max-width:600px){.discount-badge{width:82px;top:6px;right:6px}}
 
     h1{font-weight:700;text-transform:uppercase;letter-spacing:.8px;font-size:30px;margin:12px 0 10px}
@@ -61,7 +65,13 @@
     .progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-700))}
     .step-label{font-weight:700;font-size:13px;color:var(--muted)}
 
-    .btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;padding:14px 16px;border-radius:14px;border:0;background:var(--accent);color:#fff;font-weight:800;font-size:16px;cursor:pointer;position:relative;z-index:3;transition:transform .06s ease, box-shadow .2s ease}
+    .btn{
+      display:inline-flex;justify-content:center;align-items:center;gap:10px;
+      padding:14px 16px;border-radius:14px;border:0;background:var(--accent);color:#fff;
+      font-weight:800;font-size:16px;cursor:pointer;position:relative;z-index:3;
+      transition:transform .06s ease, box-shadow .2s ease;
+      touch-action:manipulation;-webkit-tap-highlight-color:transparent
+    }
     .btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(176,42,32,.25)}
     .btn:active{transform:translateY(0)}
     .btn:focus-visible{outline:3px solid rgba(176,42,32,.35);outline-offset:2px}
@@ -84,17 +94,21 @@
 
     .hidden{display:none}
 
-    .services{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:14px;text-align:center}
-    .services h3{margin:0 0 12px;font-size:22px}
-    .services .srv{margin:14px 0;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;justify-content:center}
+    /* Blocks */
+    .about{
+      margin-top:10px;margin-bottom:6px;padding:14px;background:#fff;border-radius:12px;
+      border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.05)
+    }
+    .about h3{font-size:22px;text-align:center;letter-spacing:.08em;margin:0 0 6px}
+    .about p{text-align:center;font-size:15px;line-height:1.5;color:#333;margin:0 auto;max-width:680px}
+
+    .services{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:8px;text-align:center}
+    .services h3{margin:0 0 10px;font-size:22px}
+    .services .srv{margin:10px 0;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;justify-content:center}
     .services .icon{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#b02a20;color:#fff;margin-inline:auto}
     .services .icon i{font-size:16px;line-height:1}
     .services .srv .title{font-size:18px;font-weight:700}
     .services .srv .sub{font-size:14px;color:var(--muted);margin-top:4px;grid-column:1 / -1}
-
-    .about{margin-top:16px;padding:16px;background:#fff;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.05)}
-    .about h3{font-size:22px;text-align:center;letter-spacing:.08em}
-    .about p{text-align:center;font-size:15px;line-height:1.5;color:#333;margin:0 auto;max-width:680px}
 
     .footer{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:26px 0;color:var(--muted);font-size:14px}
     .footer a{color:var(--muted);text-decoration:none}
@@ -114,8 +128,7 @@
       <div class="brand">
         <img class="logoimg" src="https://steidler.at/wordpress/wp-content/uploads/2016/12/logo_steidler.png" alt="Steidler – Dachdeckungen · Zimmerei · Spenglerei (Seit 1926)" />
         <div class="discount-badge" aria-label="30% Herbstrabatt">
-          <!-- If the PNG is next to this HTML file, keep this relative path -->
-          <img src="herbstrabatt-30.png" alt="30% Herbstrabatt" onerror="this.style.display='none'" />
+          <img src="herbstrabatt-30.png" alt="30% Herbstrabatt" onerror="this.style.display='none'">
         </div>
       </div>
     </div>
@@ -134,6 +147,7 @@
         <div class="step-label" id="stepLabel">Schritt 1/5</div>
       </div>
 
+      <!-- STEP 1 -->
       <section class="step" data-step="1">
         <h2>Wo befindet sich dein Haus?</h2>
         <div class="field">
@@ -149,11 +163,13 @@
 
         <button type="button" class="btn full" id="next1">Jetzt profitieren – Weiter zur nächsten Frage!</button>
 
+        <!-- ÜBER UNS -->
         <section class="about" aria-label="Über uns">
           <h3>ÜBER UNS</h3>
           <p>Seit 1926 steht die Familie Steidler für Qualität am Dach. Aus einer kleinen Dachdeckerei in Pitten entwickelte sich ein moderner Familienbetrieb mit Zimmerei & Spenglerei. Heute betreuen wir Kunden vom Pittental bis Wien – zuverlässig, bodenständig und in vierter Generation.</p>
         </section>
 
+        <!-- IHR DACH AUS EINER HAND -->
         <div class="services" aria-label="Ihr Dach aus einer Hand">
           <h3>IHR DACH AUS EINER HAND</h3>
           <div class="srv">
@@ -174,8 +190,182 @@
         </div>
       </section>
 
-      <!-- rest of the steps unchanged -->
+      <!-- STEP 2 -->
+      <section class="step hidden" data-step="2">
+        <div class="notice">Frage 2 von 4</div>
+        <h2>Wie alt ist dein Dach?</h2>
+        <div class="grid">
+          <button type="button" class="option" data-value="älter als 1950">älter als 1950</button>
+          <button type="button" class="option" data-value="1950–1970">1950–1970</button>
+          <button type="button" class="option" data-value="1970–1990">1970–1990</button>
+          <button type="button" class="option" data-value="jünger als 1990">jünger als 1990</button>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <button type="button" class="btn secondary" data-back>Zurück</button>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step hidden" data-step="3">
+        <div class="notice">Frage 3 von 4</div>
+        <h2>Um welches Dach handelt es sich?</h2>
+        <div class="grid cols-2">
+          <button type="button" class="option" data-value="Satteldach">Satteldach</button>
+          <button type="button" class="option" data-value="Flachdach">Flachdach</button>
+          <button type="button" class="option" data-value="Pultdach">Pultdach</button>
+          <button type="button" class="option" data-value="Walmdach">Walmdach</button>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <button type="button" class="btn secondary" data-back>Zurück</button>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step hidden" data-step="4">
+        <div class="notice">Frage 4 von 4</div>
+        <h2>Wann möchtest du die Dachsanierung umsetzen?</h2>
+        <div class="grid">
+          <button type="button" class="option" data-value="2025">2025</button>
+          <button type="button" class="option" data-value="2026">2026</button>
+          <button type="button" class="option" data-value="nach 2026">nach 2026</button>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <button type="button" class="btn secondary" data-back>Zurück</button>
+        </div>
+      </section>
+
+      <!-- STEP 5 (Kontakt) -->
+      <section class="step hidden" data-step="5">
+        <h2>Fast geschafft! Du bist nur noch einen Schritt entfernt von deiner kostenlosen Beratung!</h2>
+        <p>Wie können wir dich am besten erreichen?</p>
+
+        <div class="field">
+          <label for="name">Dein Name</label>
+          <input id="name" name="Kunden Name" class="input" required placeholder="Max Mustermann" />
+        </div>
+        <div class="field">
+          <label for="email">Deine E‑Mail Adresse</label>
+          <input id="email" name="E-Mail Adresse" type="email" class="input" required placeholder="name@beispiel.at" />
+        </div>
+        <div class="field">
+          <label for="phone">Deine Telefonnummer</label>
+          <input id="phone" name="Telefonnummer" class="input" required placeholder="0664 123 45 67" />
+        </div>
+        <div class="field" style="align-items:start">
+          <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400">
+            <input type="checkbox" id="consent" name="Einwilligung" value="Ja" required />
+            <span>Ich akzeptiere die <a href="#" target="_blank">Datenschutzbestimmungen</a>.</span>
+          </label>
+          <div class="error" id="err5">Bitte stimme den Datenschutzbestimmungen zu.</div>
+        </div>
+
+        <!-- Versteckte Antworten (schöne Labels für E‑Mail) -->
+        <input type="hidden" name="Bezirk" id="answer_district" />
+        <input type="hidden" name="Dachalter" id="answer_age" />
+        <input type="hidden" name="Dachtyp" id="answer_type" />
+        <input type="hidden" name="Sanierungszeitpunkt" id="answer_timing" />
+
+        <button class="btn full" id="submitBtn">Jetzt absenden und die kostenlose Beratung sichern!</button>
+        <div class="error" id="errSubmit">Bitte fülle alle Felder korrekt aus.</div>
+      </section>
+
+      <!-- Danke -->
+      <section class="step hidden" data-step="6">
+        <h2>Vielen Dank! 🎉</h2>
+        <p>Wir haben deine Angaben erhalten. Ein/e Expert:in meldet sich in Kürze, um deine Dachsanierung zu besprechen.</p>
+        <p style="margin-top:8px"><a class="btn small" href="#" onclick="window.location.href='tel:+431234567'">Jetzt gleich anrufen</a></p>
+      </section>
     </form>
+
+    <!-- Statische Google-Gesamtbewertung (eine Zeile, mittig) -->
+    <section class="card" style="margin-top:18px">
+      <div class="ratingbar">
+        <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAA7VBMVEUwhv8vhv0JtXkIrJj/byknivSHoFZHcEwuhv2wjlb/YTD8TVkLt2/+yQlgwxP/RkIek+Avhv63xQ36zQYQu1//SEj/SUj+SEr/R0ANumT9wQkLqp+lxwH/Vzb+VUb7zgr/RUAak97/vQkxwDMth/wOvF/UygL9zgQOvF8WvVAkjPD8TVcwhv7/mxK6xwCaxQFJwh7+zggwhv//SD4OvGD/RkP9TFb/SE3/VDcTvVYLuWsJpa3/jRr/tQsNnsT/wwl5xAn/ohEVltcfj+gevknyzAM5wC3jywIpvzvPyQFNwh63yAEIsIiSxgX/fSLOvWrWAAAAMXRSTlP+Hf79/v0LAP4T+mBLjv5RMEUm6p52sNObbEHI/ookrOzbp4quzafE7bdhkHTliuXm0NeBdwAAAZlJREFUOI11kwdywjAQRUUowgEChF5DD+lxpWOaqSH3P05WK1sCAt8zHo/e80ory4TKxPO5mmnWcvn4ySDxHpS8rpvsgvR6WeVSqPR1Xee8B7GstzMhdN+HiPeBW1ZOkYISCICBJYCbyC0rIoTQ+BeNvmvwChE5xcfYNfRsJh7PZFGIyDXE5nNuVLyVZyQHQZlMuFGVzVcFB6FhT1AJ0ashVLVtUObF65ySoqqCMmnc4JTEULAfbwrPKktKDGjnCZEUCk9SIG7C7NISBLka+yeE8a4lrwphCFdAuDIFcm6AwBbpOKeLDGM0XiHB2nSczUa06XPzjovRYKMcxnedy/5bvBBsNcO7w+Fip3zBYBB4C4QO4+Xj8fxj1ZdLpiTZ54bXy8fZ7OG0Rmm6WDAFD8wn5/t108NR/2iKxis/cl+cr7erl0I0Wkjf/fi5UafuoWV8D3w1GBjGcHgHxogZCvWOPfItchCGWGI0TVAqfpxvNsEABVEiQaVAadOdQJQouW3LnzfNuFeiFPXGhcC6S7e7htFtpwsnm/YHLWBl60mVhmwAAAAASUVORK5CYII=" alt="Google Logo"/>
+        <span class="label">Google</span>
+        <span class="stars" aria-label="5 von 5 Sternen">★★★★★</span>
+        <a href="https://www.google.com/search?sca_esv=cf0194c5a4b2998f&rlz=1C1ONGR_deAT1092AT1092&sxsrf=AE3TifMD_m7pQSE5bBMtrfjhYaQzqRUPsw:1759085877230&uds=AOm0WdE2fekQnsyfYEw8JPYozOKzQbjFypWCick41LOKngh0n7U3vJKmtUbbwPGUyqBSsjWbGrUbAwspuhqMjuY0Y69tituIowvX-0ysdjTEXuEG1RwUL6N9JS15XllECyYJyd9fT4Cidb-YbVvIFNRt4zkRpcNq85DrU3XLRKk9TsCFJbT9f4_L7VYZg2g9LgzCyOhGuJ9j&si=AMgyJEuzsz2NflaaWzrzdpjxXXRaJ2hfdMsbe_mSWso6src8sxIcg9RFcTJVLTjpoB8FrYd1Br_luYtu8v_XutZmRVSN7XejQhi2e9M1bgLbOrdhNpXxhyM%3D&q=Steidler+Ges.m.b.H+-+Zimmerer+-+Spengler+-+Dachdecker+Rezensionen&sa=X&ved=2ahUKEwiH0d3GkfyPAxXwRvEDHf-ZOkEQ3PALegQIRBAF&biw=2560&bih=1305&dpr=1" target="_blank" rel="noopener">120 Rezensionen</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      <a href="#">Impressum</a> ·
+      <a href="#">Datenschutzerklärung</a> ·
+      <a href="#">Cookies verwalten</a>
+    </div>
   </main>
+
+  <script>
+    // ===== Helpers =====
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    const steps = $$('.step');
+    let current = 1;
+
+    function setProgress(){
+      const pct = Math.min((current-1)/5*100, 100);
+      $('#bar').style.width = pct + '%';
+      $('#stepLabel').textContent = `Schritt ${current}/5`;
+    }
+    function go(step){ steps.forEach(sec => sec.classList.toggle('hidden', sec.dataset.step != step)); current = Number(step); setProgress(); }
+
+    // ===== Step 1 =====
+    function step1Advance(){
+      const el = $('#district');
+      if(!el.value){ $('#err1').style.display='block'; return; }
+      $('#err1').style.display='none';
+      $('#answer_district').value = el.value; // Hidden "Bezirk"
+      go(2);
+    }
+    const next1 = $('#next1');
+    if(next1){
+      ['click','touchend'].forEach(evt=>{
+        next1.addEventListener(evt, ()=>{ if(next1._fired) return; next1._fired=true; setTimeout(()=>next1._fired=false,250); step1Advance(); }, {passive:true});
+      });
+    }
+
+    // Zurück
+    $$('[data-back]').forEach(b => b.addEventListener('click', ()=> go(current-1)));
+
+    // Step 2
+    $$('.step[data-step="2"] .option').forEach(btn => btn.addEventListener('click', e => { $('#answer_age').value = e.currentTarget.dataset.value; go(3); }));
+    // Step 3
+    $$('.step[data-step="3"] .option').forEach(btn => btn.addEventListener('click', e => { $('#answer_type').value = e.currentTarget.dataset.value; go(4); }));
+    // Step 4
+    $$('.step[data-step="4"] .option').forEach(btn => btn.addEventListener('click', e => { $('#answer_timing').value = e.currentTarget.dataset.value; go(5); }));
+
+    // Submit to Netlify
+    function encodeForm(obj){ return new URLSearchParams(Object.entries(obj)).toString(); }
+    const submitBtn = $('#submitBtn');
+    if(submitBtn){
+      submitBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const valid = $('#name').value && $('#email').value && $('#phone').value && $('#consent').checked;
+        if(!valid){ $('#errSubmit').style.display='block'; return; }
+        $('#errSubmit').style.display='none';
+
+        const payload = {
+          'form-name': 'steidler-funnel',
+          'Kunden Name': $('#name').value,
+          'E-Mail Adresse': $('#email').value,
+          'Telefonnummer': $('#phone').value,
+          'Einwilligung': $('#consent').checked ? 'Ja' : 'Nein',
+          'Bezirk': $('#answer_district').value,
+          'Dachalter': $('#answer_age').value,
+          'Dachtyp': $('#answer_type').value,
+          'Sanierungszeitpunkt': $('#answer_timing').value
+        };
+
+        try{
+          await fetch('/', { method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded', 'Accept':'application/json' }, body: encodeForm(payload) });
+        }catch(e){ /* trotzdem Danke zeigen */ }
+
+        go(6);
+      });
+    }
+
+    // Init
+    go(1);
+  </script>
 </body>
 </html>
