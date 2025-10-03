@@ -43,13 +43,16 @@
 
     .discount-badge{position:absolute;top:10px;right:10px;width:120px;z-index:20;pointer-events:none;aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:transparent;box-shadow:0 6px 16px rgba(0,0,0,.18)}
     .discount-badge img{display:block;width:100%;height:100%;object-fit:cover}
-    @media (max-width:600px){.discount-badge{width:82px;top:6px;right:6px}}
+    @media (max-width:600px){.discount-badge{width:82px;top:6px;right:6px}
+      .about-hero img{height:115%;object-position:top center} }}
 
     h1{font-weight:700;text-transform:uppercase;letter-spacing:.8px;font-size:30px;margin:12px 0 10px;text-align:center}
+    .left{ text-align:left !important }
     h2{font-weight:700;text-transform:uppercase;letter-spacing:.8px;font-size:22px;margin:0 0 14px;text-align:center}
     p{line-height:1.55}
 
-    .card{background:var(--card);border-radius:var(--radius);padding:22px 18px;box-shadow:var(--shadow);border:1px solid var(--border)}
+    .card{background:var(--card);border-radius:var(--radius);padding:22px 18px;box-shadow:var(--shadow);border:1px solid var(--border);margin:0}
+    .stack + .stack{ margin-top:16px }
 
     .notice{color:var(--muted);font-size:14px;margin-bottom:10px;display:flex;gap:8px;align-items:center}
     .notice::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--brand);display:inline-block}
@@ -77,14 +80,14 @@
 
     .hidden{display:none}
 
-    .about-hero{margin-top:10px;margin-bottom:8px;border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.05);height:220px;position:relative}
+    .about-hero{margin-top:16px;margin-bottom:0;border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.05);height:220px;position:relative}
     .about-hero img{display:block;width:100%;height:110%;object-fit:cover;object-position:top}
 
-    .about{margin-top:10px;margin-bottom:6px;padding:14px;background:#fff;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.05)}
+    .about{margin-top:16px;margin-bottom:0;padding:14px;background:#fff;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.05)}
     .about h3{font-size:22px;text-align:center;letter-spacing:.08em;margin:0 0 6px}
     .about p{text-align:center;font-size:15px;line-height:1.5;color:#333;margin:0 auto;max-width:680px}
 
-    .services{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:12px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+    .services{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:16px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.05)}
     .services h3{text-align:center;margin:0 0 14px;font-size:22px;letter-spacing:.08em}
     .services .srv{margin:16px 0;display:grid;grid-template-columns:40px minmax(260px, 560px);justify-content:center;align-items:center;gap:12px}
     .services .icon{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#b02a20;color:#fff;justify-self:end}
@@ -128,11 +131,11 @@
       <input type="text" name="bot-field" style="display:none">
 
       <div class="notice">Nur für Wiener Neustadt & Neunkirchen!</div>
-      <h1>Dachsanierung mit 30% Herbstrabatt</h1>
+      <h1 class="left">DACHSANIERUNG MIT 30% HERBSTRABATT</h1>
       <div class="progress"><span id="bar"></span></div>
 
       <section class="step" data-step="1">
-        <h2>Wo befindet sich dein Haus?</h2>
+        <h2 class="left">WO BEFINDET SICH DEIN HAUS?</h2>
         <div class="field">
           <label for="district">Bezirk auswählen</label>
           <select id="district" required>
@@ -207,16 +210,16 @@
       </section>
     </form>
 
-    <div class="about-hero">
+    <div class="about-hero stack">
       <img src="https://steidler.at/wordpress/wp-content/uploads/2016/08/faserzement-deckung-web.jpg" alt="Faserzement-Deckung – Steidler Dach" loading="lazy">
     </div>
 
-    <section class="about">
+    <section class="about stack">
       <h3>ÜBER UNS</h3>
       <p>Seit 1926 steht die Firma Steidler für Qualität im Dachdeckerhandwerk. Heute wird das Familienunternehmen bereits in der vierten Generation geführt und betreut Kunden im Raum Wiener Neustadt, Neunkirchen und darüber hinaus. Unser Ziel: Handwerkliche Qualität, Nachhaltigkeit und ein verlässlicher Partner für Ihr Dach.</p>
     </section>
 
-    <section class="card services" aria-label="Ihr Dach aus einer Hand">
+    <section class="card services stack" aria-label="Ihr Dach aus einer Hand">
       <h3>IHR DACH AUS EINER HAND</h3>
       <div class="srv">
         <span class="icon" aria-hidden="true"><i class="fa-solid fa-helmet-safety"></i></span>
@@ -242,4 +245,78 @@
     </section>
 
     <!-- Google Gesamtbewertung -->
-    <section class="card
+    <section class="card stack" aria-label="Google Gesamtbewertung">
+      <div class="ratingbar">
+        <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAA7VBMVEUwhv8vhv0JtXkIrJj/byknivSHoFZHcEwuhv2wjlb/YTD8TVkLt2/+yQlgwxP/RkIek+Avhv63xQ36zQYQu1//SEj/SUj+SEr/R0ANumT9wQkLqp+lxwH/Vzb+VUb7zgr/RUAak97/vQkxwDMth/wOvF/UygL9zgQOvF8WvVAkjPD8TVcwhv7/mxK6xwCaxQFJwh7+zggwhv//SD4OvGD/RkP9TFb/SE3/VDcTvVYLuWsJpa3/jRr/tQsNnsT/wwl5xAn/ohEVltcfj+gevknyzAM5wC3jywIpvzvPyQFNwh63yAEIsIiSxgX/fSLOvWrWAAAAMXRSTlP+Hf79/v0LAP4T+mBLjv5RMEUm6p52sNObbEHI/ookrOzbp4quzafE7bdhkHTliuXm0NeBdwAAAZlJREFUOI11kwdywjAQRUUowgEChF5DD+lxpWOaqSH3P05WK1sCAt8zHo/e80ory4TKxPO5mmnWcvn4ySDxHpS8rpvsgvR6WeVSqPR1Xee8B7GstzMhdN+HiPeBW1ZOkYISCICBJYCbyC0rIoTQ+BeNvmvwChE5xcfYNfRsJh7PZFGIyDXE5nNuVLyVZyQHQZlMuFGVzVcFB6FhT1AJ0ashVLVtUObF65ySoqqCMmnc4JTEULAfbwrPKktKDGjnCZEUCk9SIG7C7NISBLka+yeE8a4lrwphCFdAuDIFcm6AwBbpOKeLDGM0XiHB2nSczUa06XPzjovRYKMcxnedy/5bvBBsNcO7w+Fip3zBYBB4C4QO4+Xj8fxj1ZdLpiTZ54bXy8fZ7OG0Rmm6WDAFD8wn5/t108NR/2iKxis/cl+cr7erl0I0Wkjf/fi5UafuoWV8D3w1GBjGcHgHxogZCvWOPfItchCGWGI0TVAqfpxvNsEABVEiQaVAadOdQJQouW3LnzfNuFeiFPXGhcC6S7e7htFtpwsnm/YHLWBl60mVhmwAAAAASUVORK5CYII=" alt="Google Logo">
+        <span class="label">Google</span>
+        <span class="stars" aria-label="5 von 5 Sternen">★★★★★</span>
+        <a href="https://www.google.com/search?sca_esv=cf0194c5a4b2998f&rlz=1C1ONGR_deAT1092AT1092&sxsrf=AE3TifMD_m7pQSE5bBMtrfjhYaQzqRUPsw:1759085877230&uds=AOm0WdE2fekQnsyfYEw8JPYozOKzQbjFypWCick41LOKngh0n7U3vJKmtUbbwPGUyqBSsjWbGrUbAwspuhqMjuY0Y69tituIowvX-0ysdjTEXuEG1RwUL6N9JS15XllECyYJyd9fT4Cidb-YbVvIFNRt4zkRpcNq85DrU3XLRKk9TsCFJbT9f4_L7VYZg2g9LgzCyOhGuJ9j&si=AMgyJEuzsz2NflaaWzrzdpjxXXRaJ2hfdMsbe_mSWso6src8sxIcg9RFcTJVLTjpoB8FrYd1Br_luYtu8v_XutZmRVSN7XejQhi2e9M1bgLbOrdhNpXxhyM%3D&q=Steidler+Ges.m.b.H+-+Zimmerer+-+Spengler+-+Dachdecker+Rezensionen&sa=X&ved=2ahUKEwiH0d3GkfyPAxXwRvEDHf-ZOkEQ3PALegQIRBAF&biw=2560&bih=1305&dpr=1" target="_blank" rel="noopener">120 Rezensionen</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      <a href="#">Impressum</a> ·
+      <a href="#">Datenschutzerklärung</a> ·
+      <a href="#">Cookies verwalten</a>
+    </div>
+  </main>
+
+  <script>
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    const steps = $$('.step');
+    let current = 1;
+
+    function setProgress(){
+      const pct = Math.min((current-1)/5*100, 100);
+      $('#bar').style.width = pct + '%';
+    }
+    function go(step){
+      steps.forEach(sec => sec.classList.toggle('hidden', sec.dataset.step != step));
+      current = Number(step);
+      setProgress();
+    }
+
+    // Step 1
+    function step1Advance(){
+      const el = $('#district');
+      if(!el.value){ $('#err1').style.display='block'; return; }
+      $('#err1').style.display='none';
+      go(2);
+    }
+    const next1 = $('#next1');
+    ['click','touchend'].forEach(evt => {
+      next1.addEventListener(evt, () => {
+        if (next1._fired) return;
+        next1._fired = true;
+        setTimeout(()=> next1._fired = false, 250);
+        step1Advance();
+      }, {passive:true});
+    });
+
+    // Back buttons
+    $$('[data-back]').forEach(btn => btn.addEventListener('click', () => go(current-1)));
+
+    // Step 2 options
+    $$('.step[data-step="2"] .option').forEach(btn => btn.addEventListener('click', e => go(3)));
+    // Step 3 options
+    $$('.step[data-step="3"] .option').forEach(btn => btn.addEventListener('click', e => go(4)));
+    // Step 4 options
+    $$('.step[data-step="4"] .option').forEach(btn => btn.addEventListener('click', e => go(5)));
+
+    // Submit validation (Netlify handles email)
+    $('#submitBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      const valid = $('#name').value && $('#email').value && $('#phone').value && $('#consent').checked;
+      if(!valid){ $('#errSubmit').style.display='block'; return; }
+      $('#errSubmit').style.display='none';
+      // let Netlify form fallback handle submission invisible
+      e.target.closest('form').submit();
+      go(6);
+    });
+
+    go(1);
+  </script>
+</body>
+</html>
