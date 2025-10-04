@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8" />
@@ -15,9 +15,9 @@
 
   <style>
     :root{
-      --brand:#b02a20;
-      --brand-700:#8f1f17;
-      --accent:#b02a20;
+      --brand:#e30512;
+      --brand-700:#9f040d;
+      --accent:#e30512;
       --text:#1f2a33;
       --muted:#6b7a86;
       --bg:#ffffff;
@@ -66,7 +66,7 @@
     .progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-700))}
 
     .btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;padding:14px 16px;border-radius:14px;border:0;background:var(--accent);color:#fff;font-weight:800;font-size:16px;cursor:pointer;transition:transform .06s ease, box-shadow .2s ease;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(176,42,32,.25)}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(227,5,18,.25)}
     .btn.secondary{background:#eef3f6;color:#1f2a33;border:1px solid var(--border)}
     .btn.full{width:100%}
 
@@ -75,12 +75,12 @@
 
     .option{border-radius:14px;border:2px solid var(--border);background:#fff;padding:14px;font-weight:700;text-align:center;cursor:pointer;transition:border-color .2s ease, box-shadow .2s ease}
     .option:hover{border-color:#ced7de;box-shadow:0 4px 12px rgba(0,0,0,.05)}
-    .option.active{border-color:var(--accent);background:#fff7f2}
+    .option.active{border-color:var(--accent);background:#fce5e7}
 
     .field{display:grid;gap:8px;margin-bottom:14px}
     .input, select{width:100%;padding:14px 12px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:16px}
     label{font-weight:700}
-    .error{color:#b00020;font-size:14px;margin-top:6px;display:none}
+    .error{color:var(--brand);font-size:14px;margin-top:6px;display:none}
 
     .hidden{display:none}
 
@@ -94,13 +94,13 @@
     .services{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:16px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.05)}
     .services h3{text-align:center;margin:0 0 14px;font-size:22px;letter-spacing:.08em}
     .services .srv{margin:16px 0;display:grid;grid-template-columns:40px minmax(260px, 560px);justify-content:center;align-items:center;gap:12px}
-    .services .icon{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#b02a20;color:#fff;justify-self:end}
+    .services .icon{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:var(--brand);color:#fff;justify-self:end}
     .services .icon i{font-size:16px;line-height:1}
     .services .txt{text-align:center}
     .services .txt .title{font-size:18px;font-weight:700}
     .services .txt .sub{font-size:14px;color:var(--muted);margin-top:6px}
     .services .row{display:grid;grid-auto-flow:column;grid-template-columns:auto auto;justify-content:center;align-items:center;column-gap:12px}
-    .services .icon{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#b02a20;color:#fff;margin:0}
+    .services .icon{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:var(--brand);color:#fff;margin:0}
     .services .icon i{font-size:16px;line-height:1}
     .services .srv .title{font-size:18px;font-weight:700;display:inline-block}
     .services .srv .sub{font-size:14px;color:var(--muted);margin-top:6px;text-align:center}
@@ -157,8 +157,8 @@
         <h2>Wie alt ist dein Dach?</h2>
         <div class="grid">
           <button type="button" class="option" data-value="älter als 1950">älter als 1950</button>
-          <button type="button" class="option" data-value="1950–1970">1950–1970</button>
-          <button type="button" class="option" data-value="1970–1990">1970–1990</button>
+          <button type="button" class="option" data-value="1950&ndash;1970">1950&ndash;1970</button>
+          <button type="button" class="option" data-value="1970&ndash;1990">1970&ndash;1990</button>
           <button type="button" class="option" data-value="jünger als 1990">jünger als 1990</button>
         </div>
         <button type="button" class="btn secondary" data-back>Zurück</button>
@@ -209,13 +209,13 @@
       </section>
 
       <section class="step hidden" data-step="6">
-        <h2>Vielen Dank! 🎉</h2>
+        <h2>Vielen Dank! &#127881;</h2>
         <p>Wir haben deine Angaben erhalten. Wir melden uns in Kürze bei dir.</p>
       </section>
     </form>
 
     <div class="about-hero stack">
-      <img src="https://steidler.at/wordpress/wp-content/uploads/2016/08/faserzement-deckung-web.jpg" alt="Faserzement-Deckung – Steidler Dach" loading="lazy">
+      <img src="https://steidler.at/wordpress/wp-content/uploads/2016/08/faserzement-deckung-web.jpg" alt="Faserzement-Deckung &ndash; Steidler Dach" loading="lazy">
     </div>
 
     <section class="about stack">
@@ -229,21 +229,21 @@
         <span class="icon" aria-hidden="true"><i class="fa-solid fa-helmet-safety"></i></span>
         <div class="txt">
           <div class="title">Zimmerei</div>
-          <div class="sub">Holzbau & Dämmmaßnahmen – präzise ausgeführt.</div>
+          <div class="sub">Holzbau & Dämmmaßnahmen &ndash; präzise ausgeführt.</div>
         </div>
       </div>
       <div class="srv">
         <span class="icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench"></i></span>
         <div class="txt">
           <div class="title">Spenglerei</div>
-          <div class="sub">Langlebige Blecharbeiten – sauber verarbeitet.</div>
+          <div class="sub">Langlebige Blecharbeiten &ndash; sauber verarbeitet.</div>
         </div>
       </div>
       <div class="srv">
         <span class="icon" aria-hidden="true"><i class="fa-solid fa-house-chimney"></i></span>
         <div class="txt">
           <div class="title">Dachdeckerei</div>
-          <div class="sub">Alle Dacheindeckungen – ein Ansprechpartner.</div>
+          <div class="sub">Alle Dacheindeckungen &ndash; ein Ansprechpartner.</div>
         </div>
       </div>
     </section>
@@ -253,14 +253,14 @@
       <div class="ratingbar">
         <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAA7VBMVEUwhv8vhv0JtXkIrJj/byknivSHoFZHcEwuhv2wjlb/YTD8TVkLt2/+yQlgwxP/RkIek+Avhv63xQ36zQYQu1//SEj/SUj+SEr/R0ANumT9wQkLqp+lxwH/Vzb+VUb7zgr/RUAak97/vQkxwDMth/wOvF/UygL9zgQOvF8WvVAkjPD8TVcwhv7/mxK6xwCaxQFJwh7+zggwhv//SD4OvGD/RkP9TFb/SE3/VDcTvVYLuWsJpa3/jRr/tQsNnsT/wwl5xAn/ohEVltcfj+gevknyzAM5wC3jywIpvzvPyQFNwh63yAEIsIiSxgX/fSLOvWrWAAAAMXRSTlP+Hf79/v0LAP4T+mBLjv5RMEUm6p52sNObbEHI/ookrOzbp4quzafE7bdhkHTliuXm0NeBdwAAAZlJREFUOI11kwdywjAQRUUowgEChF5DD+lxpWOaqSH3P05WK1sCAt8zHo/e80ory4TKxPO5mmnWcvn4ySDxHpS8rpvsgvR6WeVSqPR1Xee8B7GstzMhdN+HiPeBW1ZOkYISCICBJYCbyC0rIoTQ+BeNvmvwChE5xcfYNfRsJh7PZFGIyDXE5nNuVLyVZyQHQZlMuFGVzVcFB6FhT1AJ0ashVLVtUObF65ySoqqCMmnc4JTEULAfbwrPKktKDGjnCZEUCk9SIG7C7NISBLka+yeE8a4lrwphCFdAuDIFcm6AwBbpOKeLDGM0XiHB2nSczUa06XPzjovRYKMcxnedy/5bvBBsNcO7w+Fip3zBYBB4C4QO4+Xj8fxj1ZdLpiTZ54bXy8fZ7OG0Rmm6WDAFD8wn5/t108NR/2iKxis/cl+cr7erl0I0Wkjf/fi5UafuoWV8D3w1GBjGcHgHxogZCvWOPfItchCGWGI0TVAqfpxvNsEABVEiQaVAadOdQJQouW3LnzfNuFeiFPXGhcC6S7e7htFtpwsnm/YHLWBl60mVhmwAAAAASUVORK5CYII=" alt="Google Logo">
         <span class="label">Google</span>
-        <span class="stars" aria-label="5 von 5 Sternen">★★★★★</span>
+        <span class="stars" aria-label="5 von 5 Sternen">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         <a href="https://www.google.com/search?sca_esv=cf0194c5a4b2998f&rlz=1C1ONGR_deAT1092AT1092&sxsrf=AE3TifMD_m7pQSE5bBMtrfjhYaQzqRUPsw:1759085877230&uds=AOm0WdE2fekQnsyfYEw8JPYozOKzQbjFypWCick41LOKngh0n7U3vJKmtUbbwPGUyqBSsjWbGrUbAwspuhqMjuY0Y69tituIowvX-0ysdjTEXuEG1RwUL6N9JS15XllECyYJyd9fT4Cidb-YbVvIFNRt4zkRpcNq85DrU3XLRKk9TsCFJbT9f4_L7VYZg2g9LgzCyOhGuJ9j&si=AMgyJEuzsz2NflaaWzrzdpjxXXRaJ2hfdMsbe_mSWso6src8sxIcg9RFcTJVLTjpoB8FrYd1Br_luYtu8v_XutZmRVSN7XejQhi2e9M1bgLbOrdhNpXxhyM%3D&q=Steidler+Ges.m.b.H+-+Zimmerer+-+Spengler+-+Dachdecker+Rezensionen&sa=X&ved=2ahUKEwiH0d3GkfyPAxXwRvEDHf-ZOkEQ3PALegQIRBAF&biw=2560&bih=1305&dpr=1" target="_blank" rel="noopener">120 Rezensionen</a>
       </div>
     </section>
 
     <div class="footer">
-      <a href="#">Impressum</a> ·
-      <a href="#">Datenschutzerklärung</a> ·
+      <a href="#">Impressum</a> &middot;
+      <a href="#">Datenschutzerklärung</a> &middot;
       <a href="#">Cookies verwalten</a>
     </div>
   </main>
@@ -324,3 +324,8 @@
   </script>
 </body>
 </html>
+
+
+
+
+
